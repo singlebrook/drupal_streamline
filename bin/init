@@ -31,7 +31,7 @@ THEME_EXTENSION="_theme"
 THEME_NAME="$PROFILE_NAME$THEME_EXTENSION"
 
 # Rename functions in the profile
-grep -rl "drupal_bootstrap_profile" . | egrep -v 'init|\.git|default' | xargs sed -i '' -e "s/drupal_bootstrap_profile/$PROFILE_NAME/g"
+grep -rl "drupal_bootstrap_profile" . | egrep -v 'init|\.git|default|\.make' | xargs sed -i '' -e "s/drupal_bootstrap_profile/$PROFILE_NAME/g"
 
 # Rename generic profile directory
 find docroot/profiles/ -name "*drupal_bootstrap_profile*" -type d | while read directory; do mv "$directory" "${directory/drupal_bootstrap_profile/$PROFILE_NAME}"; done
@@ -40,13 +40,13 @@ find docroot/profiles/ -name "*drupal_bootstrap_profile*" -type d | while read d
 find docroot/profiles/ -name "*drupal_bootstrap_profile*" -type f | while read filename; do mv "$filename" "${filename/drupal_bootstrap_profile/$PROFILE_NAME}"; done
 
 # Insert entered client name in install profile, theme info file, readme, and more
-grep -rl 'CLIENT_NAME' . | egrep -v 'init|\.git|default' | xargs sed -i '' -e "s/CLIENT_NAME/$CLIENT_NAME/g"
+grep -rl 'CLIENT_NAME' . | egrep -v 'init|\.git|default|\.make' | xargs sed -i '' -e "s/CLIENT_NAME/$CLIENT_NAME/g"
 
 # Insert entered email address in profile
 grep -rl 'EMAIL_ADDY' docroot/profiles/ | xargs sed -i '' -e "s/EMAIL_ADDY/$EMAIL_ADDY/g"
 
 # Rename theme template functions with the new name
-grep -rl "drupal_bootstrap_theme" . | egrep -v 'init|\.git' | xargs sed -i '' -e "s/drupal_bootstrap_theme/$THEME_NAME/g"
+grep -rl "drupal_bootstrap_theme" . | egrep -v 'init|\.git|\.make' | xargs sed -i '' -e "s/drupal_bootstrap_theme/$THEME_NAME/g"
 
 # Rename the theme directory
 find docroot/sites/all/ -name "*drupal_bootstrap_theme*" -type d | while read theme_directory; do mv "$theme_directory" "${theme_directory/drupal_bootstrap_theme/$THEME_NAME}"; done
