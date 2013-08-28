@@ -13,7 +13,7 @@ The Drupal Bootstrap is a starting point for new Drupal projects. Highlights inc
 You can read more about the bash scripts in the [readme](https://github.com/singlebrook/drupal_bootstrap/tree/master/bin) of the `bin` folder. Typical setup is as follows:
 
   1. [Download](https://github.com/singlebrook/drupal_bootstrap/zipball/master) the zipped version of the project
-  2.
+  2. Modify the drupal-bootstrap.make file (optional)
   3. Run `$ bin/init` from the project root and answer questions
 
 Your responses to the questions in the init script will set up the site for the new client and replace a bunch of placholder variables in the profile and theme. It will also rename this readme and create a new, blank readme and initialize the new git repo, before running a drush site-install. The Drupal username post-install is 'admin' and the password is 'testing'.
