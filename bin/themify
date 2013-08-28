@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# This script starts guard and livereload for simplified theming
+
+if [ ! -d "docroot" ]; then
+  echo 'Please be sure that you are running this command from your project root and that you have run the init script.'
+  exit 1
+fi
+
+cd docroot
+drush en drupal_bootstrap_dev -y
+drush vset drupal_bootstrap_dev_use_livereload TRUE
+
+cd ../
+bundle exec guard -i
+
+cd docroot
+drush vset drupal_bootstrap_dev_use_livereload FALSE
+
+cd ../
+
+exit 0

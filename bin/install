@@ -1,0 +1,26 @@
+#!/bin/bash
+
+if [ ! -d "docroot" ]; then
+  echo 'Please be sure that you are running this command from your project root.'
+  exit 1
+fi
+
+if [ ! -f "docroot/sites/default/settings.php" ]; then
+  echo 'Please create a settings file at docroot/sites/default/settings.php first!'
+  exit 2
+fi
+
+# update perms on the settings file
+chmod -R a+rwx docroot/sites/default/settings.php
+
+# move into the docroot for drush command execution
+cd docroot
+
+# install the site
+drush -y -l default site-install sb_client --site-name="CLIENT_NAME" --clean-url=1 --account-pass=testing
+
+# enable the dev module
+drush -y -l default en sb_dev
+
+# move back up to the root
+cd ../
