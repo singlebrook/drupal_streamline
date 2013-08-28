@@ -63,11 +63,8 @@ echo -e "# $CLIENT_NAME" >> readme.md
 # Initialize git if it hasn't been installed
 if [ "$INIT_GIT" = "y" ]; then
   if [ ! -d ".git" ]; then
-    # delete this file
-    rm bin/init
-
-    # remove the make file
-    rm drupal-bootstrap.make
+    echo "bin/init" >> .gitignore
+    echo "drupal-bootstrap.make" >> .gitignore
 
     git init
     git add .
