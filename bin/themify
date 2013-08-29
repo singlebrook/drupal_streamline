@@ -8,14 +8,14 @@ if [ ! -d "docroot" ]; then
 fi
 
 cd docroot
-drush en drupal_bootstrap_dev -y
-drush vset drupal_bootstrap_dev_use_livereload TRUE
+drush en drupal_streamline_dev -y
+drush vset drupal_streamline_dev_use_livereload TRUE
 
 cd ../
 bundle exec guard -i
 
 cd docroot
-drush vset drupal_bootstrap_dev_use_livereload FALSE
+drush vset drupal_streamline_dev_use_livereload FALSE
 
 cd ../
 

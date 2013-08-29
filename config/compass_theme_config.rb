@@ -1,7 +1,7 @@
 # Compass configuration file
 
 # Project specific
-theme_path = 'docroot/sites/all/themes/drupal_bootstrap_theme'
+theme_path = 'docroot/sites/all/themes/drupal_streamline_theme'
 
 # Require any additional compass plugins here.
 
