@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
-gem 'guard-compass'
+gem 'guard-sass'
+gem 'compass'
 gem 'guard-livereload'
 gem 'rb-fsevent'

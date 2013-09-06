@@ -1,9 +1,13 @@
 # More info at https://github.com/guard/guard#readme
 
-guard 'compass', configuration_file: 'config/compass_theme_config.rb' do
-  watch(%r{docroot/sites/all/themes/sb_template/scss/(.*)\.s[ac]ss})
-end
+guard 'sass',
+  :input => 'docroot/sites/all/themes/drupal_streamline_theme/scss',
+  :output => 'docroot/sites/all/themes/drupal_streamline_theme/css',
+  :compass => true,
+  :style => :compressed
 
 guard 'livereload', :port => '35777' do
   watch(%r{.+\.(css|js)$})
+  callback(:start_begin) { `touch .drupal_streamline_guard_running` }
+  callback(:stop_end) { `rm .drupal_streamline_guard_running` }
 end
