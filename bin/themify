@@ -2,9 +2,23 @@
 
 # This script starts guard and livereload for simplified theming
 
+# Check to see if required gems are installed, and quit if not
+if hash bundle 2>/dev/null; then
+  bundle check
+  BUNDLE_RET_CODE=$?
+
+  if [ $BUNDLE_RET_CODE != 0 ]; then
+    exit $BUNDLE_RET_CODE
+  fi
+else
+  echo "bundle command not found. Be sure to install it from http://bundler.io/"
+  exit 1
+fi
+
+# docroot/ will only exist if the init script has properly run
 if [ ! -d "docroot" ]; then
   echo 'Please be sure that you are running this command from your project root and that you have run the init script.'
-  exit 1
+  exit 2
 fi
 
 cd docroot
