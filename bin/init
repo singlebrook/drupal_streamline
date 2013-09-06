@@ -21,7 +21,7 @@ read -p "What is the client's name? " CLIENT_NAME
 CLIENT_NAME=$(sed "s/'//g" <<< $CLIENT_NAME)
 
 # Add prompt for email addy
-read -p "What is your email address? " EMAIL_ADDY
+read -p "What is the email address for your admin user? " EMAIL_ADDY
 
 # Ask about initialization of git, defaulting to yes
 read -p "Initialize a git repository? [y]: " INIT_GIT
