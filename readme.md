@@ -8,6 +8,7 @@ The Drupal Streamline quickly creates a starting point for new Drupal projects. 
   - A custom dev module that:
     - enables useful modules like devel, diff, and field_ui
     - loads the client-side livereload js code
+    - uses [DevelMailLog](https://api.drupal.org/api/devel/devel.mail.inc/class/DevelMailLog/7) to prevent and debug outgoing email messages
     - allows for quick theme switching using the 'theme' query parameter
   - A base directory structure ready for deployment to Acquia or other hosting services
 
