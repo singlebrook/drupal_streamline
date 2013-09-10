@@ -27,6 +27,9 @@ cd docroot
 drush en drupal_streamline_dev -y
 cd ../
 
+echo
+echo "*** Don't forget to reload your browser (just once!), after which you should see a 'Browser connected.' message below."
+echo
 
 bundle exec guard -i
 
