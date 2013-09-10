@@ -21,16 +21,13 @@ if [ ! -d "docroot" ]; then
   exit 2
 fi
 
+# Ensure that the drupal_streamline_dev module is enabled, since it is responsible for
+# including the livereload.js browser script
 cd docroot
 drush en drupal_streamline_dev -y
-drush vset drupal_streamline_dev_use_livereload TRUE
-
 cd ../
+
+
 bundle exec guard -i
-
-cd docroot
-drush vset drupal_streamline_dev_use_livereload FALSE
-
-cd ../
 
 exit 0
