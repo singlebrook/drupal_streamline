@@ -23,7 +23,6 @@ class Initializer
   end
 
   def sanitize(user_string, remove_spaces = false)
-    remove_spaces ||= remove_spaces
     user_string.downcase.gsub(" ", "_") if remove_spaces
     user_string.gsub("'", '&rsquo;')
   end
