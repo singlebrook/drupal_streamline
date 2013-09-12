@@ -15,7 +15,7 @@ The Drupal Streamline quickly creates a starting point for new Drupal projects. 
 ## Requirements
 
   - [Drush](https://github.com/drush-ops/drush)
-  - Linux, Unix, or Mac OS X (tested on OS X)
+  - Ruby
 
 ## New Project Setup
 
@@ -37,17 +37,36 @@ You can read more about the bash scripts in the readme of the `bin` directory. T
   - Rename this readme and create a new, blank readme
   - Initialize a new git repo, if desired
 
+### Windows Requirements
+
+Drupal Streamline will work on Windows after installing Ruby. Steps for initializing new projects are as follows:
+
+  1. [Ruby installer](http://rubyinstaller.org/) (tested with 1.9.3-p448)
+  2. Find the appropriate [DEVELOPMENT KIT](http://rubyinstaller.org/downloads/), and follow the [installation instructions](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit)
+  3. `ruby .\bin\init`
+
 ## Theming with Sass and Livereload
 
-This project is configured with guard to watch for changes to the scss files and compile them. There is an executable script in the `bin` folder which starts guard, which in turn starts the scss compiler and livereload server.
+This project is configured with guard to watch for changes to the scss files and compile them. There is an executable script for Unix systems in the bin folder which starts guard, which in turn starts the scss compiler and livereload server. Windows-specific instructions are outlined separately below.
 
 ### Requirements
 
-  - Ruby
   - [Bundler](http://bundler.io/)
   - run `$ bundle install` once from the project root to download guard, sass, and livereload
 
 To start theming, run `$ bin/themify` from the project root. Edited Sass files will automagically compile to CSS and reload in the browser (although you may need to reload the browser once to connect to the livereload server). To stop the guard and livereload processes, hit `^c` (control + c).
+
+### Windows Sass/Livereload Requirements
+
+The [themify](/bin/themify) bash script will not work on Windows. Instead, you must first perform the following steps:
+
+  1. [Install Bundler](http://bundler.io) with `gem install bundler`
+  2. `bundle install`
+  3. `cd docroot`
+  4. `drush en drupal_streamline_dev -y`
+  5. `cd .\`
+
+From the project root, you now start guard with `bundle exec guard -i`, which will watch for scss file changes and start the livereload server. Use `^c` (control + c) to exit guard.
 
 ## Contributions
 
