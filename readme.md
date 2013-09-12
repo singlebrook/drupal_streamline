@@ -47,7 +47,7 @@ Drupal Streamline will work on Windows after installing Ruby. Steps for initiali
 
 ## Theming with Sass and Livereload
 
-This project is configured with guard to watch for changes to the scss files and compile them. There is a custom drush command defined in the drupal_streamline_dev module, which starts the scss compiler and livereload server.
+This project is configured with guard to watch for changes to the scss files and compile them. There is an executable script for Unix systems in the bin folder which starts guard, which in turn starts the scss compiler and livereload server. Windows-specific instructions are outlined separately below.
 
 ### Requirements
 
@@ -60,12 +60,11 @@ To start theming, run `$ bin/themify` from the project root. Edited Sass files w
 
 The [themify](/bin/themify) bash script will not work on Windows. Instead, you must first perform the following steps:
 
-  1. Add `gem 'wdm', '>= 0.1.0'` to the [Gemfile](/Gemfile)
-  2. [Install Bundler](http://bundler.io) with `gem install bundler`
-  3. `bundle install`
-  4. `cd docroot`
-  5. `drush en drupal_streamline_dev -y`
-  6. `cd .\`
+  1. [Install Bundler](http://bundler.io) with `gem install bundler`
+  2. `bundle install`
+  3. `cd docroot`
+  4. `drush en drupal_streamline_dev -y`
+  5. `cd .\`
 
 From the project root, you now start guard with `bundle exec guard -i`, which will watch for scss file changes and start the livereload server. Use `^c` (control + c) to exit guard.
 
