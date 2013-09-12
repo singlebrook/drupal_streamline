@@ -61,7 +61,7 @@ class Initializer
   end
 
   def replace_string(find, replace)
-    excluded_files = ['init.rb', 'initializer.rb', 'settings.php', 'drupal-streamline.make']
+    excluded_files = ['initializer.rb', 'settings.php', 'drupal-streamline.make']
 
     Dir.glob("./**/*").each do |filename|
       next if File.directory? filename
@@ -80,7 +80,7 @@ class Initializer
 
     File.rename('readme.md', 'drupal-streamline.md')
     add_to_file('readme.md', "# #{@client_name}")
-    add_to_file('.gitignore', 'bin/init.rb')
+    add_to_file('.gitignore', 'bin/init')
     add_to_file('.gitignore', 'bin/initializer.rb')
     add_to_file('.gitignore', 'drupal-streamline.make')
     `git init`
