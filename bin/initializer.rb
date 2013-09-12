@@ -89,6 +89,6 @@ class Initializer
   end
 
   def add_to_file(filepath, string)
-    File.open(filepath, "w") { |file| file << string }
+    File.open(filepath, "a+") { |file| file << string + "\n" }
   end
 end
