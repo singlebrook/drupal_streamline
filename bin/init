@@ -1,80 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 
-if [ ! -f "drupal-streamline.make" ]; then
-  echo 'Please be sure that you are running this command from your project root.'
-  exit 1
-fi
+require './bin/initializer'
 
-# Build a drupal site in docroot using the make file
-drush make drupal-streamline.make docroot
+# Make sure the project has been initialized
+unless File.exists? 'drupal-streamline.make' 
+  abort 'Please be sure that you are running this command from your project root.'
+end
 
-# Add prompt for the profile name, so the site can be installed
-read -p "What is the name of the profile for the site? " PROFILE_NAME
+initializer = Initializer.new
 
-# Remove spaces and lowercase the profile name
-PROFILE_NAME=$(sed 's/ /_/g' <<< $PROFILE_NAME | awk '{print tolower($0)}')
-
-# Add prompt for the client name
-read -p "What is the client's name? " CLIENT_NAME
-
-# Remove single quotes from the client name
-CLIENT_NAME=$(sed "s/'//g" <<< $CLIENT_NAME)
-
-# Add prompt for email addy
-read -p "What is the email address for your admin user? " EMAIL_ADDY
-
-# Ask about initialization of git, defaulting to yes
-read -p "Initialize a git repository? [y]: " INIT_GIT
-INIT_GIT=${INIT_GIT:-y}
-
-THEME_EXTENSION="_theme"
-THEME_NAME="$PROFILE_NAME$THEME_EXTENSION"
-
-# Rename functions in the profile
-grep -rl "drupal_streamline_profile" . | egrep -v 'init|\.git|default|\.make' | xargs sed -i '' -e "s/drupal_streamline_profile/$PROFILE_NAME/g"
-
-# Rename generic profile directory
-find docroot/profiles/ -name "*drupal_streamline_profile*" -type d | while read directory; do mv "$directory" "${directory/drupal_streamline_profile/$PROFILE_NAME}"; done
-
-# Rename generic profile filenames
-find docroot/profiles/ -name "*drupal_streamline_profile*" -type f | while read filename; do mv "$filename" "${filename/drupal_streamline_profile/$PROFILE_NAME}"; done
-
-# Insert entered client name in install profile, theme info file, readme, and more
-grep -rl 'CLIENT_NAME' . | egrep -v 'init|\.git|default|\.make' | xargs sed -i '' -e "s/CLIENT_NAME/$CLIENT_NAME/g"
-
-# Insert entered email address in profile
-grep -rl 'EMAIL_ADDY' docroot/profiles/ | xargs sed -i '' -e "s/EMAIL_ADDY/$EMAIL_ADDY/g"
-
-# Rename theme template functions with the new name
-grep -rl "drupal_streamline_theme" . | egrep -v 'init|\.git|\.make' | xargs sed -i '' -e "s/drupal_streamline_theme/$THEME_NAME/g"
-
-# Rename the theme directory
-find docroot/sites/all/ -name "*drupal_streamline_theme*" -type d | while read theme_directory; do mv "$theme_directory" "${theme_directory/drupal_streamline_theme/$THEME_NAME}"; done
-
-# Rename the theme .info and other files
-find docroot/sites/all/ -name "*drupal_streamline_theme*" -type f | while read theme_filename; do mv "$theme_filename" "${theme_filename/drupal_streamline_theme/$THEME_NAME}"; done
-
-# rename the readme
-mv "readme.md" "drupal-streamline.md"
-
-# create a new readme
-echo -e "# $CLIENT_NAME" >> readme.md
-
-# Initialize git if it hasn't been installed
-if [ "$INIT_GIT" = "y" ]; then
-  if [ ! -d ".git" ]; then
-    echo "bin/init" >> .gitignore
-    echo "drupal-streamline.make" >> .gitignore
-
-    git init
-    git add .
-    git commit -m 'Initial commit'
-  else
-    echo "You already have a .git directory! Are you working on the Drupal Streamline itself?"
-    exit 2
-  fi
-fi
-
-echo "Congratulations! Your new site is ready for installation!"
-
-exit 0
+initializer.init
