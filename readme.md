@@ -25,7 +25,7 @@ You can read more about the bash scripts in the readme of the `bin` directory. T
   2. Modify the drupal-streamline.make file (optional)
   3. Run `$ bin/init` from the project root and answer questions
 
-`bin/init.rb` will do the following:
+`bin/init` will do the following:
 
   - Download the latest versions of:
     - Drupal 7
@@ -43,7 +43,7 @@ Drupal Streamline will work on Windows after installing Ruby. Steps for initiali
 
   1. [Ruby installer](http://rubyinstaller.org/) (tested with 1.9.3-p448)
   2. Find the appropriate [DEVELOPMENT KIT](http://rubyinstaller.org/downloads/), and follow the [installation instructions](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit)
-  3. `ruby .\bin\init.rb`
+  3. `ruby .\bin\init`
 
 ## Theming with Sass and Livereload
 
