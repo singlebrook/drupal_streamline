@@ -47,26 +47,15 @@ Drupal Streamline will work on Windows after installing Ruby. Steps for initiali
 
 ## Theming with Sass and Livereload
 
-This project is configured with guard to watch for changes to the scss files and compile them. There is an executable script for Unix systems in the bin folder which starts guard, which in turn starts the scss compiler and livereload server. Windows-specific instructions are outlined separately below.
+This project is configured with [Guard](https://github.com/guard/guard/) to watch for changes to the scss files and compile them. There is a Guardfile in the project root, which starts the scss compiler and livereload server. There is also a legacy script called 'themify' in the bin folder (UNIX-only).
 
 ### Requirements
 
   - [Bundler](http://bundler.io/)
   - run `$ bundle install` once from the project root to download guard, sass, and livereload
+  - The drupal_streamline_dev module must be enabled for LiveReload
 
-To start theming, run `$ bin/themify` from the project root. Edited Sass files will automagically compile to CSS and reload in the browser (although you may need to reload the browser once to connect to the livereload server). To stop the guard and livereload processes, hit `^c` (control + c).
-
-### Windows Sass/Livereload Requirements
-
-The [themify](/bin/themify) bash script will not work on Windows. Instead, you must first perform the following steps:
-
-  1. [Install Bundler](http://bundler.io) with `gem install bundler`
-  2. `bundle install`
-  3. `cd docroot`
-  4. `drush en drupal_streamline_dev -y`
-  5. `cd .\`
-
-From the project root, you now start guard with `bundle exec guard -i`, which will watch for scss file changes and start the livereload server. Use `^c` (control + c) to exit guard.
+To start theming, start guard with `$ bundle exec guard -i` from the project root. Edited Sass files will automagically compile to CSS and reload in the browser (although you may need to reload the browser once to connect to the livereload server). To stop the guard and livereload processes, hit `^c` (control + c).
 
 ## Contributions
 
