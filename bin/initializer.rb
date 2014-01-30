@@ -22,8 +22,8 @@ class Initializer
     @init_git = prompt 'Initialize a git repository (y/n)?'
   end
 
-  def sanitize(user_string, remove_spaces = false)
-    user_string = user_string.downcase.gsub(" ", "_") if remove_spaces
+  def sanitize(user_string, convert_to_var_name = false)
+    user_string = user_string.downcase.gsub(/[- ]/, "_") if convert_to_var_name
     user_string.gsub("'", '&rsquo;')
   end
 
