@@ -6,6 +6,8 @@ class Initializer
     add_user_prompts
     run_make_file
     replace_streamline_placeholders
+    File.rename('readme.md', 'drupal-streamline.md')
+    add_to_file('readme.md', "# #{@client_name}")
     initialize_git if @init_git.downcase == 'y'
 
     puts "Congratulations! Your new site is ready for installation!"
@@ -78,8 +80,6 @@ class Initializer
       return puts "You already have a .git directory! Are you working on the Drupal Streamline itself?"
     end
 
-    File.rename('readme.md', 'drupal-streamline.md')
-    add_to_file('readme.md', "# #{@client_name}")
     add_to_file('.gitignore', 'bin/init')
     add_to_file('.gitignore', 'bin/initializer.rb')
     add_to_file('.gitignore', 'drupal-streamline.make')
