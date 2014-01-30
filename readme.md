@@ -47,7 +47,7 @@ Drupal Streamline will work on Windows after installing Ruby. Steps for initiali
 
 ## Theming with Sass and Livereload
 
-This project is configured with [Guard](https://github.com/guard/guard/) to watch for changes to the scss files and compile them. There is a Guardfile in the project root, which starts the scss compiler and livereload server. There is also a legacy script called 'themify' in the bin folder (UNIX-only).
+This project is configured with [Guard](https://github.com/guard/guard/) to watch for changes to the scss files and compile them. There is a Guardfile in the project root, which starts the scss compiler and livereload server.
 
 ### Requirements
 
@@ -55,7 +55,7 @@ This project is configured with [Guard](https://github.com/guard/guard/) to watc
   - run `$ bundle install` once from the project root to download guard, sass, and livereload
   - The drupal_streamline_dev module must be enabled for LiveReload
 
-To start theming, start guard with `$ bundle exec guard -i` from the project root. Edited Sass files will automagically compile to CSS and reload in the browser (although you may need to reload the browser once to connect to the livereload server). To stop the guard and livereload processes, hit `^c` (control + c).
+To start theming, start guard with `$ bundle exec guard -i` from the project root. Edited Sass files will automagically compile to CSS and reload in the browser (although you may need to reload the browser once to connect to the livereload server). To stop the guard and livereload processes, hit `^d` (control + d).
 
 ## Contributions
 
@@ -73,7 +73,7 @@ This will create git clones in the following locations:
     docroot/sites/all/modules/custom/drupal_streamline_dev
     docroot/sites/all/themes/drupal_streamline_theme
 
-At this point, you could set up a vhost pointing to docroot, install Drupal using the 'CLIENT_NAME Profile', and start hacking. `bin/themify` will work, so you can make changes to the starter theme and quickly test them in your browser. You can also create branches and commits in the component directory (docroot/sites/all/themes/drupal_streamline_theme in this case). However, you won't be able to push your changes to the original github remote.
+At this point, you could set up a vhost pointing to docroot, install Drupal using the 'CLIENT_NAME Profile', and start hacking. `bundle exec guard` will work, so you can make changes to the starter theme and quickly test them in your browser. You can also create branches and commits in the component directory (docroot/sites/all/themes/drupal_streamline_theme in this case). However, you won't be able to push your changes to the original github remote.
 
 To submit your changes for pull requests or review, you should fork the component, add the fork as a remote, and push your branch to that fork. Component repos can be found here:
 
