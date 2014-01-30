@@ -21,4 +21,15 @@ Example:
      `patch -p1 < ../../../../../../views-more_link_class-1557926.patch`
   3. If you created the patch, add it to the project issue queue so that it might be included in a future release
 
----
+## Current Patches
+
+Please remove these items when/if official updates incorporate the included changes.
+
+* system (Drupal core)
+  * Prevents Drupal from disabling write permissions on the sites/default directory
+  * https://drupal.org/node/1232572#comment-6767162
+  * https://drupal.org/files/system.install-1232572.10.patch
+
+* default.settings.php (Drupal core)
+  * Allows the use of a local settings file for developers
+  * default.settings.php-local_settings.patch

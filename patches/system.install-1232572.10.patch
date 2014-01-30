@@ -1,0 +1,60 @@
+diff --git a/modules/system/system.install b/modules/system/system.install
+index 7b66767..3152682 100644
+--- a/modules/system/system.install
++++ b/modules/system/system.install
+@@ -233,14 +233,27 @@ function system_requirements($phase) {
+     }
+   }
+ 
+-  // Test settings.php file writability
++  // Test settings.php file writability.
+   if ($phase == 'runtime') {
+-    $conf_dir = drupal_verify_install_file(conf_path(), FILE_NOT_WRITABLE, 'dir');
+-    $conf_file = drupal_verify_install_file(conf_path() . '/settings.php', FILE_EXIST|FILE_READABLE|FILE_NOT_WRITABLE);
++    // Allow system administrators to ignore permissions hardening for the site
++    // directory. This allows additional files in the site directory to be
++    // updated when they are managed in a version control system.
++    if (!variable_get("ignore_site_directory_permissions", FALSE)) {
++      $conf_dir = drupal_verify_install_file(conf_path(), FILE_NOT_WRITABLE, 'dir');
++      $conf_file = drupal_verify_install_file(conf_path() . '/settings.php', FILE_EXIST|FILE_READABLE|FILE_NOT_WRITABLE);
++      $message = $t('Not protected');
++      $severity = REQUIREMENT_ERROR;
++    }
++    else {
++      $conf_dir = FALSE;
++      $conf_file = FALSE;
++      $message = $t('Protection disabled');
++      $severity = REQUIREMENT_WARNING;
++    }
+     if (!$conf_dir || !$conf_file) {
+       $requirements['settings.php'] = array(
+-        'value' => $t('Not protected'),
+-        'severity' => REQUIREMENT_ERROR,
++        'value' => $message,
++        'severity' => $severity,
+         'description' => '',
+       );
+       if (!$conf_dir) {
+diff --git a/sites/default/default.settings.php b/sites/default/default.settings.php
+index 40f552e..a532684 100644
+--- a/sites/default/default.settings.php
++++ b/sites/default/default.settings.php
+@@ -551,3 +551,18 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
+  * Remove the leading hash signs to disable.
+  */
+ # $conf['allow_authorize_operations'] = FALSE;
++
++/**
++ * Override file system permissions hardening.
++ *
++ * The system module will periodically check the permissions of your site
++ * site directory to ensure that they are not writable by the website user.
++ * For sites that are managed with a version control system, this can cause
++ * problems when files in that directory (such as a "settings.inc" containing
++ * additional configuration) when the files are updated, as the user pulling
++ * in the changes won't have permissions to modify files in the directory.
++ *
++ * Remove the leading hash sign to disable permissions hardening.
++ */
++# $conf['ignore_site_directory_permissions'] = TRUE;
++

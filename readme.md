@@ -28,7 +28,7 @@ You can read more about the bash scripts in the readme of the `bin` directory. T
 `bin/init` will do the following:
 
   - Download the latest versions of:
-    - Drupal 7
+    - Drupal 7 (with two optional developer-friendly patches. See patches/readme.md)
     - some common contrib modules (selectable in the drupal-streamline.make file)
     - a starter theme template
     - a starter install profile template

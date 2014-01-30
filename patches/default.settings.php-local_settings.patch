@@ -1,0 +1,61 @@
+diff --git a/sites/default/default.settings.php b/sites/default/default.settings.php
+index 31e295a..0f04941 100644
+--- a/sites/default/default.settings.php
++++ b/sites/default/default.settings.php
+@@ -566,3 +566,18 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
+  */
+ # $conf['ignore_site_directory_permissions'] = TRUE;
+ 
++/**
++ * Load local development override configuration, if available.
++ *
++ * Use settings.local.php to override variables on secondary (staging,
++ * development, etc) installations of this site. Typically used to disable
++ * caching, JavaScript/CSS compression, re-routing of outgoing e-mails, and
++ * other things that should not happen on development and testing sites.
++ *
++ * Keep this code block at the end of this file to take full effect.
++ */
++$conf_path = conf_path();
++if (file_exists(DRUPAL_ROOT . '/' . $conf_path . '/settings.local.php')) {
++  include DRUPAL_ROOT . '/' . $conf_path . '/settings.local.php';
++}
++
+diff --git a/sites/default/example.settings.local.php b/sites/default/example.settings.local.php
+new file mode 100644
+index 0000000..8159c44
+--- /dev/null
++++ b/sites/default/example.settings.local.php
+@@ -0,0 +1,32 @@
++<?php
++$databases = array (
++  'default' =>
++  array (
++    'default' =>
++    array (
++      'database' => '',
++      'username' => '',
++      'password' => '',
++      'host' => '127.0.0.1',
++      'port' => '',
++      'driver' => 'mysql',
++      'prefix' => '',
++    ),
++  ),
++);
++
++// Other stuff useful during development
++
++// Disable cache
++$conf['cache'] = 0;
++
++// Disable css and javascript aggregation by default
++$conf['preprocess_css'] = 0;
++$conf['preprocess_js'] = 0;
++
++// Force the use of the GD image toolkit (in case a sql-sync'd site was set
++// to use imagemagick, which may not be installed)
++$conf['image_toolkit'] = 'gd';
++
++// Disable write permission disabling of sites/default
++$conf['ignore_site_directory_permissions'] = TRUE;
