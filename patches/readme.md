@@ -34,3 +34,8 @@ Please remove these items when/if official updates incorporate the included chan
   * Allows the use of a local settings file for developers
   * https://drupal.org/node/1118520
   * default.settings.php-local_settings.patch
+
+* css aggregation in common.inc (Drupal core)
+  * Prevents breakage of protocol-relative paths in CSS preprocessing
+  * https://drupal.org/node/2014851
+  * https://drupal.org/files/issues/css_dont_import_protocol_relative-2014851-12.patch

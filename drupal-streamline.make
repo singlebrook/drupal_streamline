@@ -8,6 +8,7 @@ api = 2
 projects[drupal][type] = "core"
 projects[drupal][patch][] = "patches/system.install-1232572.10.patch"
 projects[drupal][patch][] = "patches/default.settings.php-local_settings.patch"
+projects[drupal][patch][] = "patches/css_dont_import_protocol_relative-2014851-12.patch"
 
 ; By default, put all projects in contrib (e.g. sites/all/modules/contrib/)
 defaults[projects][subdir] = "contrib"
