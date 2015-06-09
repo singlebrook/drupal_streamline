@@ -3,8 +3,10 @@
 The Drupal Streamline quickly creates a starting point for new Drupal projects. Highlights include:
 
   - Automatic download of the latest version of Drupal core (7.x) and some commonly used modules
-  - Seamless integration with theming tools like [Sass](http://sass-lang.com/) and LiveReload
   - A ready-to-go install profile and HTML5-ready theme
+  - Built in task runner for asset compilation, testing, and more!
+  - PHPUnit and Behat for total test awesomeness
+  - Drush 6 bundled right into the project, just add your favorite db server, fire up drush runserver and you're off to the races!
   - A custom dev module that:
     - enables useful modules like devel, diff, and field_ui
     - loads the client-side livereload js code
@@ -14,21 +16,21 @@ The Drupal Streamline quickly creates a starting point for new Drupal projects. 
 
 ## Requirements
 
-  - [Drush](https://github.com/drush-ops/drush)
-  - Ruby
+  - [Composer](http://getcomposer.org)
+  - PHP 5.4+ (to use drush server and some vendor packages to their fullest)
 
 ## New Project Setup
 
-You can read more about the bash scripts in the readme of the `bin` directory. Typical setup is as follows:
 
   1. [Download](https://github.com/singlebrook/drupal_streamline/archive/master.zip) the zipped version of the project
   2. Modify the drupal-streamline.make file (optional)
-  3. Run `$ bin/init` from the project root and answer questions
+  3. Run `composer install` from the project root
+  4. Run `./vendor/bin/robo init` and answer the questions as asked
 
-`bin/init` will do the following:
+`robo init` will do the following:
 
   - Download the latest versions of:
-    - Drupal 7 (with two optional developer-friendly patches. See patches/readme.md)
+    - Drupal 7 (with optional developer-friendly patches. See patches/readme.md)
     - some common contrib modules (selectable in the drupal-streamline.make file)
     - a starter theme template
     - a starter install profile template
@@ -37,31 +39,12 @@ You can read more about the bash scripts in the readme of the `bin` directory. T
   - Rename this readme and create a new, blank readme
   - Initialize a new git repo, if desired
 
-### Windows Requirements
-
-Drupal Streamline will work on Windows after installing Ruby. Steps for initializing new projects are as follows:
-
-  1. [Ruby installer](http://rubyinstaller.org/) (tested with 1.9.3-p448)
-  2. Find the appropriate [DEVELOPMENT KIT](http://rubyinstaller.org/downloads/), and follow the [installation instructions](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit)
-  3. `ruby .\bin\init`
-
-## Theming with Sass and Livereload
-
-This project is configured with [Guard](https://github.com/guard/guard/) to watch for changes to the scss files and compile them. There is a Guardfile in the project root, which starts the scss compiler and livereload server.
-
-### Requirements
-
-  - [Bundler](http://bundler.io/)
-  - run `$ bundle install` once from the project root to download guard, sass, and livereload
-  - The drupal_streamline_dev module must be enabled for LiveReload
-
-To start theming, start guard with `$ bundle exec guard -i` from the project root. Edited Sass files will automagically compile to CSS and reload in the browser (although you may need to reload the browser once to connect to the livereload server). To stop the guard and livereload processes, hit `^d` (control + d).
 
 ## Contributions
 
 The easiest way to contribute to the Drupal Streamline project is to fork and clone a copy of this repository.
 
-You'll be able to modify the make file and bash scripts, but not the other components (like the dev module and starter theme & install profile).
+You'll be able to modify the make file and php scripts, but not the other components (like the dev module and starter theme & install profile).
 
 The easiest way to get a copy of those is to run the drush make file with the `--working-copy` switch, like so:
 
@@ -73,7 +56,7 @@ This will create git clones in the following locations:
     docroot/sites/all/modules/custom/drupal_streamline_dev
     docroot/sites/all/themes/drupal_streamline_theme
 
-At this point, you could set up a vhost pointing to docroot, install Drupal using the 'CLIENT_NAME Profile', and start hacking. `bundle exec guard` will work, so you can make changes to the starter theme and quickly test them in your browser. You can also create branches and commits in the component directory (docroot/sites/all/themes/drupal_streamline_theme in this case). However, you won't be able to push your changes to the original github remote.
+At this point, you could set up a server pointing to docroot, install Drupal using the 'CLIENT_NAME Profile', and start hacking. You can also create branches and commits in the component directory (docroot/sites/all/themes/drupal_streamline_theme in this case). However, you won't be able to push your changes to the original github remote.
 
 To submit your changes for pull requests or review, you should fork the component, add the fork as a remote, and push your branch to that fork. Component repos can be found here:
 

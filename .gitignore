@@ -1,2 +1,4 @@
 *.sass-cache
 docroot/.drupal_streamline_guard_running
+/vendor/
+/node_modules/
